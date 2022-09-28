@@ -11,51 +11,71 @@ export default class Form extends Component {
         <input
           type="text"
           data-testid="name-input"
+          name="cardName"
           value={ cardName }
           onChange={ onInputChange }
         />
+        <br />
         <textarea
           data-testid="description-input"
+          name="cardDescription"
           value={ cardDescription }
           onChange={ onInputChange }
         >
           ..
         </textarea>
+        <br />
         <input
           type="number"
           data-testid="attr1-input"
+          name="cardAttr1"
           value={ cardAttr1 }
           onChange={ onInputChange }
         />
+        <br />
         <input
           type="number"
           data-testid="attr2-input"
+          name="cardAttr2"
           value={ cardAttr2 }
           onChange={ onInputChange }
         />
+        <br />
         <input
           type="number"
           data-testid="attr3-input"
+          name="cardAttr3"
           value={ cardAttr3 }
           onChange={ onInputChange }
         />
+        <br />
         <input
           type="text"
           data-testid="image-input"
+          name="cardImage"
           value={ cardImage }
           onChange={ onInputChange }
         />
-        <select data-testid="rare-input" value={ cardRare } onChange={ onInputChange }>
+        <br />
+        <select
+          data-testid="rare-input"
+          name="cardRare"
+          value={ cardRare }
+          onChange={ onInputChange }
+        >
           <option value="normal">normal</option>
           <option value="raro">raro</option>
           <option value="muito raro">muito raro</option>
         </select>
+        <br />
         <input
           type="checkbox"
           data-testid="trunfo-input"
+          name="cardTrunfo"
           checked={ cardTrunfo }
           onChange={ onInputChange }
         />
+        <br />
         <button
           type="button"
           data-testid="save-button"
@@ -64,6 +84,7 @@ export default class Form extends Component {
         >
           Salvar
         </button>
+        <br />
       </form>
     );
   }
