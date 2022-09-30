@@ -8,9 +8,9 @@ class App extends React.Component {
     this.state = {
       cardName: '',
       cardDescription: '',
-      cardAttr1: '',
-      cardAttr2: '',
-      cardAttr3: '',
+      cardAttr1: 0,
+      cardAttr2: 0,
+      cardAttr3: 0,
       cardImage: '',
       cardRare: '',
       cardTrunfo: false,
@@ -53,10 +53,30 @@ class App extends React.Component {
     });
   };
 
+  clearbutton = () => {
+    this.setState(() => ({
+      cardName: '',
+      cardDescription: '',
+      cardAttr1: 0,
+      cardAttr2: 0,
+      cardAttr3: 0,
+      cardImage: '',
+      cardRare: '',
+      cardTrunfo: false,
+      isSaveButtonDisabled: true,
+    }));
+  };
+
   onSaveButtonClick = (objInfo) => {
     this.setState((prevState) => ({
       data: [...prevState.data, objInfo],
-    }));
+    }), this.clearbutton);
+  };
+
+  deleteCardButton = () => {
+    this.setState(({ target }) => {
+      target.remove();
+    });
   };
 
   render() {
@@ -69,9 +89,9 @@ class App extends React.Component {
           onInputChange={ this.onInputChange }
           cardName={ cardName }
           cardDescription={ cardDescription }
-          cardAttr1={ cardAttr1 }
-          cardAttr2={ cardAttr2 }
-          cardAttr3={ cardAttr3 }
+          cardAttr1={ +cardAttr1 }
+          cardAttr2={ +cardAttr2 }
+          cardAttr3={ +cardAttr3 }
           cardImage={ cardImage }
           cardRare={ cardRare }
           isSaveButtonDisabled={ isSaveButtonDisabled }
@@ -82,28 +102,45 @@ class App extends React.Component {
           onInputChange={ this.onInputChange }
           cardName={ cardName }
           cardDescription={ cardDescription }
-          cardAttr1={ cardAttr1 }
-          cardAttr2={ cardAttr2 }
-          cardAttr3={ cardAttr3 }
+          cardAttr1={ +cardAttr1 }
+          cardAttr2={ +cardAttr2 }
+          cardAttr3={ +cardAttr3 }
           cardImage={ cardImage }
           cardRare={ cardRare }
           cardTrunfo={ cardTrunfo }
         />
         {
-          data.map((element, index) => (<Card
-            key={ index }
-            onInputChange={ this.onInputChange }
-            cardName={ element.cardName }
-            cardDescription={ element.cardDescription }
-            cardAttr1={ element.cardAttr1 }
-            cardAttr2={ element.cardAttr2 }
-            cardAttr3={ element.cardAttr3 }
-            cardImage={ element.cardImage }
-            cardRare={ element.cardRare }
-            // cardTrunfo={ element.cardTrunfo }
-            // <button>salvar</button>
-
-          />))
+          data.map((element, index) => (
+            <>
+              <Card
+                className="CardList"
+                key={ index }
+                onInputChange={ this.onInputChange }
+                cardName={ element.cardName }
+                cardDescription={ element.cardDescription }
+                cardAttr1={ element.cardAttr1 }
+                cardAttr2={ element.cardAttr2 }
+                cardAttr3={ element.cardAttr3 }
+                cardImage={ element.cardImage }
+                cardRare={ element.cardRare }
+                cardTrunfo={ element.cardTrunfo }
+              />
+              <button
+                type="button"
+                data-testid="delete-button"
+                onClick={ () => this.deleteCardButton({
+                  cardName,
+                  cardDescription,
+                  cardAttr1,
+                  cardAttr2,
+                  cardAttr3,
+                  cardImage,
+                  cardRare }) }
+              >
+                salvar
+              </button>
+            </>
+          ))
         }
       </>
     );
