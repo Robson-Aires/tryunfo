@@ -73,9 +73,11 @@ class App extends React.Component {
     }), this.clearbutton);
   };
 
-  deleteCardButton = () => {
-    this.setState(({ target }) => {
-      target.remove();
+  deleteCardButton = (value) => {
+    const { data } = this.state;
+    const result = data.filter((element) => value !== element.cardName);
+    this.setState({
+      data: result,
     });
   };
 
@@ -128,16 +130,9 @@ class App extends React.Component {
               <button
                 type="button"
                 data-testid="delete-button"
-                onClick={ () => this.deleteCardButton({
-                  cardName,
-                  cardDescription,
-                  cardAttr1,
-                  cardAttr2,
-                  cardAttr3,
-                  cardImage,
-                  cardRare }) }
+                onClick={ () => this.deleteCardButton(element.cardName) }
               >
-                salvar
+                excluir
               </button>
             </>
           ))
