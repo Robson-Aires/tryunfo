@@ -5,6 +5,7 @@ export default class Card extends Component {
   render() {
     const { cardName, cardDescription, cardAttr1, cardAttr2,
       cardAttr3, cardImage, cardRare, cardTrunfo } = this.props;
+    console.log(cardTrunfo);
     return (
       <>
         <p data-testid="name-card">{ cardName }</p>
